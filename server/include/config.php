@@ -1,5 +1,8 @@
 <?php
 
+// currently, tables used are called 'products' and 'users'
+// Check model files for information about necessary columns
+
 return [
     'database' => [
         'host' => 'localhost',
