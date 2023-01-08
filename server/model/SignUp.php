@@ -4,7 +4,7 @@ namespace model;
 use model\Database;
 use PDO;
 
-class SingUp extends Database {
+class SignUp extends Database {
 
     private PDO $connection;
 
@@ -39,7 +39,7 @@ class SingUp extends Database {
         $statement->bindValue(":uid", $uid, PDO::PARAM_STR);
         $statement->execute();
 
-        if ($statement->rowCount() !== 0) {
+        if ($statement->fetchColumn() !== 0) {
             return true;
         }
 
@@ -59,7 +59,7 @@ class SingUp extends Database {
         $statement->bindValue(":email", $email, PDO::PARAM_STR);
         $statement->execute();
 
-        if ($statement->rowCount() !== 0) {
+        if ($statement->fetchColumn() !== 0) {
             return true;
         }
 

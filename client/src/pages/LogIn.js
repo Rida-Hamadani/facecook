@@ -9,8 +9,8 @@ class LogIn extends Component {
 
         this.state = {
 
-            username: '',
-            password: '',
+            uid: '',
+            pwd: '',
             response: null
 
         };
@@ -25,8 +25,8 @@ class LogIn extends Component {
                 headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
                 body: new URLSearchParams({
 
-                     "uid": this.state.username,
-                     "pwd": this.state.password,
+                     "uid": this.state.uid,
+                     "pwd": this.state.pwd,
                      "submit": "true"
 
                 })
@@ -40,18 +40,18 @@ class LogIn extends Component {
         
         }
     
-    handleUsernameChange = event => {
+    handleUidChange = event => {
 
         this.setState({
-          username: event.target.value
+          uid: event.target.value
         });
 
     }
     
-    handlePasswordChange = event => {
+    handlePwdChange = event => {
 
         this.setState({
-            password: event.target.value
+            pwd: event.target.value
         });
 
     }
@@ -62,10 +62,10 @@ class LogIn extends Component {
             <h2>Log In</h2>
             <form onSubmit={this.handleSubmit}>
             <label htmlFor="username">Username:</label>
-            <input type="text" name="uid" placeholder="username" onChange={this.handleUsernameChange}/>
+            <input type="text" name="uid" placeholder="Username" onChange={this.handleUidChange}/>
             <br />
             <label htmlFor="password">Password:</label>
-            <input type="password" name="pwd" placeholder="password" onChange={this.handlePasswordChange}/>
+            <input type="password" name="pwd" placeholder="Password" onChange={this.handlePwdChange}/>
             <br />
             <p>Don't have an account? <Link to='/signup'>Sign up</Link></p>
             <button type="submit">Log In</button>

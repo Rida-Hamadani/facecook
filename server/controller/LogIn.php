@@ -20,6 +20,8 @@ class LogIn extends \model\LogIn {
 
     public function logInUser(): void {
 
+        $errors = $this->getValidationErrors();
+
         if (! empty($errors)) {
 
             http_response_code(400);
@@ -51,6 +53,8 @@ class LogIn extends \model\LogIn {
                 break;
             
             default:
+
+                echo json_encode(['messages'=>['Success']]);
 
                 break;
 

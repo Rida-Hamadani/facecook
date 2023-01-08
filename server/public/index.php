@@ -74,8 +74,9 @@ switch($parts[1]){
 
                 $signUpGateway = new model\SignUp($database);
 
-                $signUp = new controller\SignUp($uid, $pwd, $pwdRepeat, $email, $signUpGateway);
+                $signUpController = new controller\SignUp($uid, $pwd, $pwdRepeat, $email, $signUpGateway);
 
+                $signUpController->signUpUser();
 
             }
 
