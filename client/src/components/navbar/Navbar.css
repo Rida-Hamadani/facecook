@@ -1,0 +1,77 @@
+.logo {
+    font-size: 2rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+    background-color: #45bce8;
+    color: #0c0c04;
+}
+
+.nav ul {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nav a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: .25rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav li.active {
+    background-color: #41A7CC;
+}
+
+.nav li:hover {
+    background-color: #3c91b0;
+}
+
+.nav .burger-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.fa-times {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.fa-sign-in {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 500px) {
+
+    .nav ul {
+        flex-direction: column;
+    }
+
+    .nav li:first-child {
+        margin-top: 50px;
+    }
+
+    .nav li:last-child {
+        margin-bottom: 20px;
+    }
+
+    .nav li {
+        width: 100%;
+        border-top: 1px solid #000;
+        text-align: center;
+        margin-right: 0px;
+        padding: 20px 0;
+    }
+}
