@@ -10,7 +10,7 @@ class SignUp extends \model\SignUp {
     private string $pwdRepeat;
     private string $email;
 
-    public function __construct(string $uid, string $pwd, string $pwdRepeat, string $email) {
+    public function __construct(string $uid, string $pwd, string $pwdRepeat, string $email, \model\SignUp $gateway) {
         
         // Cannot use construct property promotion in PHP7
 
@@ -24,6 +24,8 @@ class SignUp extends \model\SignUp {
 
     public function signUpUser(): void {
 
+        $errors = $this->getValidationErrors();
+
         if (! empty($errors)) {
 
             http_response_code(400);
@@ -34,7 +36,25 @@ class SignUp extends \model\SignUp {
 
         }
 
-        $this->gateway->setUser($this->uid, $this->pwd, $this->email);
+        $flag = $this->gateway->setUser($this->uid, $this->pwd, $this->email);
+
+        switch($flag){
+
+            case 0:
+
+                http_response_code(500);
+
+                echo json_encode(['errors'=>['Something went wrong']]);
+
+                break;
+            
+            default:
+
+                echo json_encode(['messages'=>['Success']]);
+
+                break;
+
+        }
 
     }
 
@@ -75,13 +95,13 @@ class SignUp extends \model\SignUp {
 
         }
 
-        if ($this->isUidTaken()) {
+        if ($this->gateway->isUidTaken($this->uid)) {
 
             $errors[] = 'Username taken';
 
         }
 
-        if ($this->isEmailTaken()) {
+        if ($this->gateway->isEmailTaken($this->email)) {
 
             $errors[] = 'E-mail already registered';
 

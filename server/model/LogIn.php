@@ -17,19 +17,21 @@ class LogIn extends Database {
         $sql = 'SELECT pwd 
                 FROM users
                 WHERE uid = :uid
-                OR email = :uid;';
+                OR email = :email;';
 
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(":uid", $uid, PDO::PARAM_STR);
+        $statement->bindValue(":email", $uid, PDO::PARAM_STR);
         $statement->execute();
+
+        $pwdHashed = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($statement->rowCount() === 0) {
             // Username not found
             return -1;
-        }
-
-        $hashedPwd = $statement->fetchAll(PDO::FETCH_ASSOC);
-        if (! password_verify($pwd, $pwdHashed[0]['pwd'])) {
+        } 
+        
+        if (! password_verify($pwd, $pwdHashed['pwd'])) {
             // Incorrect password
             return 0;
         } 
@@ -37,10 +39,11 @@ class LogIn extends Database {
         $sql = 'SELECT *
         FROM users
         WHERE uid = :uid
-        OR email = :uid;';
+        OR email = :email;';
 
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(":uid", $uid, PDO::PARAM_STR);
+        $statement->bindValue(":email", $uid, PDO::PARAM_STR);
         $statement->execute();
 
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
