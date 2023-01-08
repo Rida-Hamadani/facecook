@@ -25,38 +25,65 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 $parts = explode('/', $_SERVER["REQUEST_URI"]);
 
-if (! in_array($parts[1], ['products', 'login'])) {
-    http_response_code(404);
-    exit;
-}
-
 $database = new model\Database($config['database'], $config['user'][0], $config['password'][0]);
 
-if ($parts[1] === 'products') {
+switch($parts[1]){
 
-$id = $parts[2] ?? null;
+    case 'products':
 
-$productGateway = new model\Product($database);
+        $id = $parts[2] ?? null;
 
-$productController = new controller\Product($productGateway);
+        $productGateway = new model\Product($database);
 
-$productController->processRequest($_SERVER['REQUEST_METHOD'], $id);
+        $productController = new controller\Product($productGateway);
+
+        $productController->processRequest($_SERVER['REQUEST_METHOD'], $id);
+
+        break;
+
+    case 'login':
+
+        if (isset($_POST['submit'])) {
+
+            // Grab the data and instantiate the log in controller
+
+            $uid = $_POST['uid'];
+            $pwd = $_POST['pwd'];
+
+            $logInGateway = new model\LogIn($database);
+
+            $logInController = new controller\LogIn($uid, $pwd, $logInGateway);
+
+            // User log in with error handling
+
+            $logInController->logInUser();
+
+        }
+        
+        break;
+
+        case 'signup':
+
+            if (isset($_POST['submit'])) {
+
+                // Grab the data and instantiate the sign up controller
+                $uid = $_POST['uid'];
+                $pwd = $_POST['pwd'];
+                $pwdRepeat = $_POST['pwdRepeat'];
+                $email = $_POST['email'];
+
+                $signUpGateway = new model\SignUp($database);
+
+                $signUp = new controller\SignUp($uid, $pwd, $pwdRepeat, $email, $signUpGateway);
+
+
+            }
+
+            break;
+
+    default:
+
+        http_response_code(404);
+        exit;
+    
 }
-
-if ($parts[1] === 'login') {
-if (isset($_POST['submit'])) {
-
-    // Grab the data and instantiate the log in controller
-
-    $uid = $_POST['uid'];
-    $pwd = $_POST['pwd'];
-
-    $logInGateway = new model\LogIn($database);
-
-    $logInController = new controller\LogIn($uid, $pwd, $logInGateway);
-
-    // User log in with error handling
-
-    $logInController->logInUser();
-
-}}

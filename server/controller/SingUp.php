@@ -4,6 +4,7 @@ namespace controller;
 
 class SignUp extends \model\SignUp {
 
+    private \model\SignUp $gateway;
     private string $uid;
     private string $pwd;
     private string $pwdRepeat;
@@ -13,6 +14,7 @@ class SignUp extends \model\SignUp {
         
         // Cannot use construct property promotion in PHP7
 
+        $this->gateway = $gateway;
         $this->uid = $uid;
         $this->pwd = $pwd;
         $this->pwdRepeat = $pwdRepeat;
@@ -32,7 +34,7 @@ class SignUp extends \model\SignUp {
 
         }
 
-        $this->setUser($this->uid, $this->pwd, $this->email);
+        $this->gateway->setUser($this->uid, $this->pwd, $this->email);
 
     }
 
