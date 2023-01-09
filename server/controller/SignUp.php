@@ -83,12 +83,6 @@ class SignUp extends \model\SignUp {
 
         }
 
-        if (! preg_match("/^[a-zA-Z0-9_]*$/", $this->uid)) {
-            
-            $errors[] = 'Username can only contain letters, numbers, or underscores';
-
-        }
-
         if (strlen($this->uid) < 5 || strlen($this->uid) > 16) {
             
             $errors[] = 'Username must contain between 5 and 16 characters';
