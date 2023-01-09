@@ -39,7 +39,7 @@ class SignUp extends Database {
         $statement->bindValue(":uid", $uid, PDO::PARAM_STR);
         $statement->execute();
 
-        if ($statement->fetchColumn() !== 0) {
+        if ($statement->rowCount() !== 0) {
             return true;
         }
 
@@ -59,7 +59,7 @@ class SignUp extends Database {
         $statement->bindValue(":email", $email, PDO::PARAM_STR);
         $statement->execute();
 
-        if ($statement->fetchColumn() !== 0) {
+        if ($statement->rowCount() !== 0) {
             return true;
         }
 

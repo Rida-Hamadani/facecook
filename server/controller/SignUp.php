@@ -83,6 +83,30 @@ class SignUp extends \model\SignUp {
 
         }
 
+        if (! preg_match("/^[a-zA-Z0-9_]*$/", $this->uid)) {
+            
+            $errors[] = 'Username can only contain letters, numbers, or underscores';
+
+        }
+
+        if (strlen($this->uid) < 5 || strlen($this->uid) > 16) {
+            
+            $errors[] = 'Username must contain between 5 and 16 characters';
+
+        }
+
+        if (! preg_match('/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/', $this->pwd)) {
+
+            $errors[] = 'Password must contain at least one number and one letter';
+
+        }
+
+        if (strlen($this->pwd) < 8 || strlen($this->pwd) > 25) {
+            
+            $errors[] = 'Password must contain between 8 and 25 characters';
+
+        }
+
         if (! filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             
             $errors[] = 'Invalid email address';
