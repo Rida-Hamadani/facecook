@@ -22,7 +22,7 @@ export class Navbar extends Component {
     this.setState({
       innerWidth: window.innerWidth
     });
-    window.innerWidth > 500 && (
+    window.innerWidth > 600 && (
       this.setState({
         isMenuOpen: false
       })
@@ -40,8 +40,8 @@ export class Navbar extends Component {
   render() {
     return (
         <nav className="nav">
-          {(!this.state.isMenuOpen || this.state.innerWidth > 500) && <Link to="/" className="logo">FaceCook</Link>}
-          {(this.state.isMenuOpen || this.state.innerWidth > 500) && (
+          {(!this.state.isMenuOpen || this.state.innerWidth > 600) && <Link to="/" className="logo">FaceCook</Link>}
+          {(this.state.isMenuOpen || this.state.innerWidth > 600) && (
             <ul>
               <CustomLink to='/shop'>Shop</CustomLink>
               <CustomLink to='/about'>About</CustomLink>
@@ -49,7 +49,7 @@ export class Navbar extends Component {
               <CustomLink to='/login'><i className="fa fa-sign-in"/> Log In</CustomLink>
             </ul>
           )}
-          {this.state.innerWidth <= 500 && (<div className="burger-container" onClick={this.toggleMenu}>
+          {this.state.innerWidth <= 600 && (<div className="burger-container" onClick={this.toggleMenu}>
             {!this.state.isMenuOpen && (<i className="fa fa-bars"/>
             )}
             {this.state.isMenuOpen && <i className="fa fa-times" />}

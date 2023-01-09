@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import Label from '../../components/label/Label';
+import './Auth.css';
 
 class SignUp extends Component {
 
@@ -79,31 +81,38 @@ class SignUp extends Component {
     }
 
   render() {
+
+    const { response } = this.state;
+
+    if (response && response.messages && response.messages[0] === 'Success') {
+
+        return <Navigate to="/login" />;
+
+    }
+
+
     return (
         <Fragment>
-            <h2>Sign Up</h2>
             <form onSubmit={this.handleSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" name="uid" placeholder="Username" onChange={this.handleUidChange} />
-            <br />
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="pwd" placeholder="Password" onChange={this.handlePwdChange} />
-            <br />
-            <label htmlFor="password">Repeat password:</label>
-            <input type="password" name="pwdRepeat" placeholder="Password" onChange={this.handlePwdRepeatChange} />
-            <br />
-            <label htmlFor="email">E-mail:</label>
-            <input type="text" name="email" placeholder="E-mail" onChange={this.handleEmailChange} />
-            <br />
-            <p>Already have an account? <Link to='/logIn'>Log in</Link></p>
-            <button type="submit">Sign Up</button>
+                <div className="auth-container auth-center">
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="uid" placeholder="Username" onChange={this.handleUidChange} />
+                    <br />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="pwd" placeholder="Password" onChange={this.handlePwdChange} />
+                    <br />
+                    <label htmlFor="password">Repeat password</label>
+                    <input type="password" name="pwdRepeat" placeholder="Password" onChange={this.handlePwdRepeatChange} />
+                    <br />
+                    <label htmlFor="email">E-mail</label>
+                    <br />
+                    <input type="text" name="email" placeholder="E-mail" onChange={this.handleEmailChange} />
+                    <br />
+                    <p>Already have an account? <Link to='/logIn'>Log in</Link></p>
+                    <button type="submit">Sign Up</button>
+                    {response && response.errors && <Label message={response.errors[0]}/>}
+                </div>
             </form>
-
-            {this.state.response ? (
-          <p>{JSON.stringify(this.state.response)}</p>
-        ) : (
-          <p>Loading...</p>
-        )}
 
         </Fragment>
         );

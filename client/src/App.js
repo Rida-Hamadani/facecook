@@ -4,8 +4,8 @@ import Home from './pages/home/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Shop from './pages/Shop';
-import LogIn from './pages/LogIn';
-import SignUp from "./pages/SignUp";
+import LogIn from './pages/auth/LogIn';
+import SignUp from "./pages/auth/SignUp";
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 

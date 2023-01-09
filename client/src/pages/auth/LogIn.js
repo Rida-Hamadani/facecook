@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import Label from '../../components/label/Label';
+import './Auth.css';
 
 class LogIn extends Component {
 
@@ -37,7 +39,7 @@ class LogIn extends Component {
                 response: data
 
             }))
-        
+
         }
     
     handleUidChange = event => {
@@ -57,25 +59,30 @@ class LogIn extends Component {
     }
 
   render() {
+
+    const { response } = this.state;
+
+    if (response && response.messages && response.messages[0] === 'Success') {
+
+        return <Navigate to="/" />;
+
+      }
+
     return (
         <Fragment>
-            <h2>Log In</h2>
             <form onSubmit={this.handleSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" name="uid" placeholder="Username" onChange={this.handleUidChange}/>
-            <br />
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="pwd" placeholder="Password" onChange={this.handlePwdChange}/>
-            <br />
-            <p>Don't have an account? <Link to='/signup'>Sign up</Link></p>
-            <button type="submit">Log In</button>
+                <div className="auth-container auth-center">
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="uid" placeholder="Username" onChange={this.handleUidChange}/>
+                    <br />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="pwd" placeholder="Password" onChange={this.handlePwdChange}/>
+                    <br />
+                    <p>Don't have an account? <Link to='/signup'>Sign up</Link></p>
+                    <button type="submit">Log In</button>
+                    {response && response.errors && <Label message={response.errors[0]}/>}
+                </div>
             </form>
-
-            {this.state.response ? (
-          <p>{JSON.stringify(this.state.response)}</p>
-        ) : (
-          <p>Loading...</p>
-        )}
 
         </Fragment>
         );
