@@ -27,64 +27,6 @@ $parts = explode('/', $_SERVER["REQUEST_URI"]);
 
 $database = new model\Database($config['database'], $config['user'][0], $config['password'][0]);
 
-switch($parts[1]){
+$mainController = new controller\Main($parts, $database);
 
-    case 'products':
-
-        $id = $parts[2] ?? null;
-
-        $productGateway = new model\Product($database);
-
-        $productController = new controller\Product($productGateway);
-
-        $productController->processRequest($_SERVER['REQUEST_METHOD'], $id);
-
-        break;
-
-    case 'login':
-
-        if (isset($_POST['submit'])) {
-
-            // Grab the data and instantiate the log in controller
-
-            $uid = $_POST['uid'];
-            $pwd = $_POST['pwd'];
-
-            $logInGateway = new model\LogIn($database);
-
-            $logInController = new controller\LogIn($uid, $pwd, $logInGateway);
-
-            // User log in with error handling
-
-            $logInController->logInUser();
-
-        }
-        
-        break;
-
-        case 'signup':
-
-            if (isset($_POST['submit'])) {
-
-                // Grab the data and instantiate the sign up controller
-                $uid = $_POST['uid'];
-                $pwd = $_POST['pwd'];
-                $pwdRepeat = $_POST['pwdRepeat'];
-                $email = $_POST['email'];
-
-                $signUpGateway = new model\SignUp($database);
-
-                $signUpController = new controller\SignUp($uid, $pwd, $pwdRepeat, $email, $signUpGateway);
-
-                $signUpController->signUpUser();
-
-            }
-
-            break;
-
-    default:
-
-        http_response_code(404);
-        exit;
-    
-}
+$mainController->route();
