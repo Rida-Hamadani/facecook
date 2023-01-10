@@ -65,11 +65,13 @@
 
 }
 
-.fa-sign-in {
+.fa-sign-in, .fa-sign-out {
 
     margin-right: 10px;
 
 }
+
+
 
 @media screen and (max-width: 600px) {
 

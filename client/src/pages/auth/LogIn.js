@@ -21,26 +21,32 @@ class LogIn extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-            fetch('http://localhost:8888/login', {
+        fetch('http://localhost:8888/login', {
 
-                method: 'POST',
-                headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
-                body: new URLSearchParams({
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+            body: new URLSearchParams({
 
-                     "uid": this.state.uid,
-                     "pwd": this.state.pwd,
-                     "submit": "true"
+                    "uid": this.state.uid,
+                    "pwd": this.state.pwd,
+                    "submit": "true"
 
-                })
             })
-            .then(response => response.json())
-            .then(data => this.setState({
+        })
+        .then(response => response.json())
+        .then(data => {
 
-                response: data
+            this.handleSuccess(this.state.uid, data);
 
-            }))
+            this.setState({
 
-        }
+            response: data
+
+            });
+
+        })
+
+    }
     
     handleUidChange = event => {
 
@@ -58,15 +64,31 @@ class LogIn extends Component {
 
     }
 
+    handleSuccess = (uid, response) => {
+
+        if (response && response.messages && response.messages[0] === 'Success') {
+
+            localStorage.setItem("user", JSON.stringify(uid));
+
+            window.dispatchEvent(new Event("logIn"));
+    
+        }
+
+        return true;
+
+    }
+
+
   render() {
 
     const { response } = this.state;
 
     if (response && response.messages && response.messages[0] === 'Success') {
 
+
         return <Navigate to="/" />;
 
-      }
+    }
 
     return (
         <Fragment>
