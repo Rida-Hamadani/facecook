@@ -90,6 +90,13 @@ class SignUp extends Component {
 
     }
 
+    if (localStorage.getItem('user')) {
+
+
+        return <Navigate to="/" />;
+
+    }
+
 
     return (
         <Fragment>

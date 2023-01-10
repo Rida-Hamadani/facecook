@@ -77,6 +77,22 @@ class Main {
 
                 break;
 
+                case 'cart':
+    
+                    // Grab the data and instantiate the cart controller
+
+                    $uid = $this->parts[2] ?? null;
+
+                    $cartGateway = new \model\Cart($this->database);
+
+                    $cartController = new \controller\Cart($cartGateway);
+
+                    // User sign up with error handling
+
+                    $cartController->processRequest($_SERVER['REQUEST_METHOD'], $uid);
+    
+                    break;    
+
         default:
 
             http_response_code(404);

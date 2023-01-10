@@ -92,7 +92,8 @@ export class Navbar extends Component {
 
         <nav className="nav">
           {(!isMenuOpen || innerWidth > 600) && <Link to="/" className="logo">FaceCook</Link>}
-          {(user && !isMenuOpen)? <i className="fa fa-shopping-cart" /> : ''}
+          {(user && !isMenuOpen)?
+          <Link to='/cart'><div className="cart"><i className="fa fa-shopping-cart fa-2x" /></div></Link>: ''}
           {(isMenuOpen || innerWidth > 600) && (
             <ul>
               <CustomLink to='/shop'>Shop</CustomLink>

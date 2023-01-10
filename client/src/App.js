@@ -6,6 +6,8 @@ import Contact from './pages/Contact';
 import Shop from './pages/Shop';
 import LogIn from './pages/auth/LogIn';
 import SignUp from "./pages/auth/SignUp";
+import Cart from "./pages/cart/Cart";
+import NotFound from "./pages/404/NotFound";
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
@@ -15,12 +17,14 @@ export class App extends Component {
         <Fragment>
             <Navbar />
             <Routes>
+                <Route path='*' element={<NotFound />} />
                 <Route path='/' element={<Home />} />
                 <Route path='/shop' element={<Shop />} />
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/login' element={<LogIn />} />
                 <Route path='/signup' element={<SignUp />} />
+                <Route path='cart' element={<Cart />} />
             </Routes>
         </Fragment>
     );

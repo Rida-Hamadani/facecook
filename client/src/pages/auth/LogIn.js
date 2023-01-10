@@ -16,6 +16,7 @@ class LogIn extends Component {
             response: null
 
         };
+        
     }
     
     handleSubmit = event => {
@@ -83,7 +84,7 @@ class LogIn extends Component {
 
     const { response } = this.state;
 
-    if (response && response.messages && response.messages[0] === 'Success') {
+    if (localStorage.getItem('user')) {
 
 
         return <Navigate to="/" />;
