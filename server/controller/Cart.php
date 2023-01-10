@@ -81,6 +81,10 @@ class Cart extends \model\Cart {
 
     private function encodeCart(array $data): string {
 
+        if ($data['new'] = 'empty') {
+            return '0';
+        } 
+
         $foo = [];
 
         foreach ($data as $key => $value) {
@@ -95,6 +99,9 @@ class Cart extends \model\Cart {
 
     private function decodeCart(string $data): array {
 
+        if ($data === '0') {
+            return ['cart' => 'empty'];
+        }
 
         $foo1 = explode(':', $data);
 

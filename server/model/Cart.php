@@ -24,6 +24,10 @@ class Cart extends Database {
 
         $data = $statement->fetch(PDO::FETCH_ASSOC);
 
+        if (!$data) {
+            return '';
+        }
+
         return $data['cart'];
 
     }
