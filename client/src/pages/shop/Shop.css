@@ -1,0 +1,9 @@
+.products {
+
+    align-items: stretch;
+    justify-content: space-around;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+
+}

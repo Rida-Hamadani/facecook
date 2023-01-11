@@ -14,9 +14,9 @@ class Cart extends \model\Cart {
 
     }
 
-    public function processRequest(string $method, string $iud): void {
+    public function processRequest(string $method, string $uid): void {
 
-        $cart = $this->gateway->get($iud);
+        $cart = $this->gateway->get($uid);
 
         if ($cart === '') {
 
@@ -34,9 +34,10 @@ class Cart extends \model\Cart {
 
                 break;
 
-            case 'PUT':
+            case 'POST':
 
-                $data = (array) json_decode(file_get_contents('php://input'), true);
+                $data = $_POST;
+
                 $errors = $this->getValidationErrors($data, true);
 
                 if (! empty($errors)) {
@@ -49,7 +50,7 @@ class Cart extends \model\Cart {
 
                 }
 
-                $rows = $this->gateway->update($this->encodeCart($data['new']), $iud);
+                $rows = $this->gateway->update($this->translateCart($data['new'], $uid), $uid);
 
                 if ($rows === 0) {
 
@@ -63,7 +64,7 @@ class Cart extends \model\Cart {
 
                 http_response_code(201);
 
-                echo json_encode(['message' => 'Cart created']);
+                echo json_encode(['message' => 'Cart updated']);
 
                 break;
 
@@ -73,27 +74,51 @@ class Cart extends \model\Cart {
             default:
             
                 http_response_code(405);
-                header('Allow: GET, PUT');
+                header('Allow: GET, POST');
 
         }
 
     }
 
+    private function translateCart(string $update, string $uid): string {
+        
+        $old = $this->decodeCart($this->gateway->get($uid));
+        $new = $old;
+
+        if (isset($old[$update])) {
+
+            ++$new[$update];
+
+        } elseif (isset($old['cart']) && $old['cart'] === 'empty') {
+
+            $new = [$update => "1"];
+
+        } else {
+
+            $new += [$update => "1"];
+            ksort($new);
+
+        }
+
+        return $this->encodeCart($new);
+
+    }
+
     private function encodeCart(array $data): string {
 
-        if ($data['new'] = 'empty') {
+        if (isset($data['cart']) && $data['cart'] === 'empty') {
             return '0';
         } 
 
         $foo = [];
 
-        foreach ($data as $key => $value) {
-
-            $foo[] = "$key:$value";
+        foreach ($data as $id => $number) {
+            
+            $foo[] = "$id:$number";
 
         }
-        
-        return http_build_query($foo, '', ':');
+
+        return implode(':', $foo);
 
     }
 
@@ -107,12 +132,12 @@ class Cart extends \model\Cart {
 
         $foo2 = [];
 
-        for ($i = 0; $i <= (int) floor(count($foo1) / 2); $i += 2) {
-            
-            $foo2[] = [$foo1[$i] => $foo1[$i+1]];
+        for ($i = 0; $i < (int) count($foo1)-1; $i += 2) {
 
-        } 
-        
+            $foo2[$foo1[$i]] = $foo1[$i + 1];
+
+        }
+
         return $foo2;
 
     }
@@ -121,7 +146,7 @@ class Cart extends \model\Cart {
 
         $errors = [];
 
-        if (!$data['new']) {
+        if (empty($data['new'])) {
 
             $errors[] = 'New data is required';
 

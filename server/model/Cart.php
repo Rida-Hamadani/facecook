@@ -41,6 +41,7 @@ class Cart extends Database {
         $statement = $this->connection->prepare($sql);         
         $statement->bindValue(":cart", $new, PDO::PARAM_STR);
         $statement->bindValue(":uid", $uid, PDO::PARAM_STR);
+        $statement->execute();
 
         return $statement->rowCount();
 
