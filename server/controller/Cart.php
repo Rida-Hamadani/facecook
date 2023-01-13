@@ -50,7 +50,15 @@ class Cart extends \model\Cart {
 
                 }
 
-                $rows = $this->gateway->update($this->translateCart($data['new'], $uid), $uid);
+                if (!empty($data['new'])){
+
+                    $rows = $this->gateway->update($this->translateCart($data['new'], $uid, 1), $uid);
+
+                } else {
+
+                    $rows = $this->gateway->update($this->translateCart($data['remove'], $uid, 0), $uid);
+
+                }
 
                 if ($rows === 0) {
 
@@ -80,23 +88,44 @@ class Cart extends \model\Cart {
 
     }
 
-    private function translateCart(string $update, string $uid): string {
+    private function translateCart(string $update, string $uid, bool $add): string {
         
         $old = $this->decodeCart($this->gateway->get($uid));
         $new = $old;
+        if ($add) {
 
-        if (isset($old[$update])) {
+            if (isset($old[$update])) {
 
-            ++$new[$update];
+                ++$new[$update];
 
-        } elseif (isset($old['cart']) && $old['cart'] === 'empty') {
+            } elseif (isset($old['cart']) && $old['cart'] === 'empty') {
 
-            $new = [$update => "1"];
+                $new = [$update => "1"];
+
+            } else {
+
+                $new += [$update => "1"];
+                ksort($new);
+
+            }
 
         } else {
 
-            $new += [$update => "1"];
-            ksort($new);
+            if (isset($old[$update])) {
+
+                --$new[$update];
+
+                if ($new[$update] === 0) {
+
+                    unset($new[$update]);
+
+                }
+
+            } elseif (isset($old['cart']) && $old['cart'] === 'empty') {
+
+                return '0';
+
+            }
 
         }
 
@@ -106,7 +135,7 @@ class Cart extends \model\Cart {
 
     private function encodeCart(array $data): string {
 
-        if (isset($data['cart']) && $data['cart'] === 'empty') {
+        if ((isset($data['cart']) && $data['cart'] === 'empty') || empty($data)) {
             return '0';
         } 
 
@@ -146,7 +175,7 @@ class Cart extends \model\Cart {
 
         $errors = [];
 
-        if (empty($data['new'])) {
+        if (empty($data['new']) && empty($data['remove'])) {
 
             $errors[] = 'New data is required';
 

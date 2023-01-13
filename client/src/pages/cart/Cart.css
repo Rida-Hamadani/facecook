@@ -1,0 +1,77 @@
+
+
+
+table {
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+    border: 1px solid black;
+    border-spacing: 0;
+
+}
+
+@media only screen and (max-width: 800px) {
+
+    table {
+
+        width: 90%;
+
+    }
+
+}
+
+td {
+
+    text-align: center;
+    width: 50%;
+    padding: 1%
+    
+}
+
+tbody tr:hover {
+
+    background-color: #EDEADE;
+    
+}
+
+tbody tr:hover::after {
+
+    content: "Remove?";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+
+}
+
+tr::after {
+
+    opacity: 0;
+    transition: opacity 0.2s;
+
+}
+
+
+.empty-cart {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.empty-cart a {
+
+    color: inherit;
+    text-decoration: none;
+
+}
+
+.empty-cart a:hover {
+
+    text-decoration: underline;
+
+}
