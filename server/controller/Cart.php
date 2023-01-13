@@ -14,7 +14,14 @@ class Cart extends \model\Cart {
 
     }
 
-    public function processRequest(string $method, string $uid): void {
+    public function processRequest(string $method, ?string $uid): void {
+
+        if (empty($uid)) {
+
+            echo json_encode(['error' => 'User is required']);
+            return;
+
+        }
 
         $cart = $this->gateway->get($uid);
 

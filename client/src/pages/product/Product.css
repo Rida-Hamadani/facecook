@@ -1,3 +1,10 @@
+.page-container {
+
+    display:flex;
+    flex-direction: column; 
+
+}
+
 .product-container {
 
     height: 100%;
@@ -114,5 +121,39 @@
 
     margin-left: 10px;
     display: none;
+
+}
+
+@media (max-width: 600px) {
+
+    .product-container {
+        flex-direction: column-reverse;
+    }
+    
+    .left-column {
+        width: 100%;
+        position: relative;
+    }
+
+    .right-column {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .left-column img {
+        width: 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+    }
+
+    .comments {
+        display:block
+    }
+}
+
+.comments {
+
+    margin-top: 5%;
 
 }

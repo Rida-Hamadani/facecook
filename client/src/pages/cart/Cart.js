@@ -17,26 +17,6 @@ export class Cart extends Component {
 
     }
 
-    componentDidMount() {
-
-        this.setState({ cart: [] });
-
-        const uid = localStorage.getItem('user');
-
-        if (! uid) {
-            return;
-        }
-
-        fetch('http://localhost:8888/cart/' +  uid.slice(1,-1))
-        .then(response => response.json())
-        .then(data => 
-        
-            this.handleCart(data)
-
-        )
-
-    }
-
     handleRemove = index => {
 
         const uid = localStorage.getItem('user');
@@ -101,6 +81,50 @@ export class Cart extends Component {
         }
 
     }
+
+    calculateCost = () => {
+
+        let cost = 0;
+
+        this.state.cart.forEach((item) => {
+
+            cost += item[0].cost * item[1];
+
+        })
+
+        return cost;
+
+    }
+
+    displayMessage = () => {
+
+        document.getElementById("final-message").style.display="block"; 
+        setTimeout(function () {
+            document.getElementById("final-message").style.display="none"; 
+        }, 2000);
+
+    }
+
+    componentDidMount() {
+
+        this.setState({ cart: [] });
+
+        const uid = localStorage.getItem('user');
+
+        if (! uid) {
+            return;
+        }
+
+        fetch('http://localhost:8888/cart/' +  uid.slice(1,-1))
+        .then(response => response.json())
+        .then(data => 
+        
+            this.handleCart(data)
+
+        )
+
+    }
+
     
     render() {
 
@@ -120,6 +144,9 @@ export class Cart extends Component {
                 </div>
             ) : (
                 <div className="cart-container">
+                <div className="head">
+                    <p>Click an item to remove</p>
+                </div>
                 <table>
                     <thead>
                     <tr>
@@ -136,6 +163,11 @@ export class Cart extends Component {
                         ))}
                     </tbody>
                 </table>
+                <div className="cost-container">
+                    <p>Total cost: {this.calculateCost()}$</p>
+                </div>
+                <button onClick={this.displayMessage}>Pay</button>
+                <div id="final-message">Payment Successful!</div>
                 </div>
             )}
             </Fragment>

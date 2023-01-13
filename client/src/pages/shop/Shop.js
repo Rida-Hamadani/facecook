@@ -40,8 +40,8 @@ class Shop extends Component {
      <Fragment>
       <div className="products">
         {response ?
-      response.map(props => {
-          return <ProductCard {...props}/>
+      response.map((props, index) => {
+          return <ProductCard key={index} {...props}/>
       })
         : <p>Loading...</p>}
       </div>

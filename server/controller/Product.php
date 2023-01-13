@@ -99,7 +99,7 @@ class Product extends \model\Product {
 
             case 'DELETE':
 
-                $row = $this->gateway->delete($id);
+                $rows = $this->gateway->delete($id);
 
                 echo json_encode([
 
@@ -186,7 +186,7 @@ class Product extends \model\Product {
 
             if (filter_var($data['cost'], FILTER_VALIDATE_INT) === false) {
                 
-                $errors[] = 'size must be an integer';
+                $errors[] = 'cost must be an integer';
 
             }
 

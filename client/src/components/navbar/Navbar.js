@@ -96,9 +96,9 @@ export class Navbar extends Component {
           <Link to='/cart'><div className="cart"><i className="fa fa-shopping-cart fa-2x" /></div></Link>: ''}
           {(isMenuOpen || innerWidth > 600) && (
             <ul>
-              <CustomLink to='/shop'>Shop</CustomLink>
-              <CustomLink to='/about'>About</CustomLink>
-              <CustomLink to='contact'>Contact</CustomLink>
+              <CustomLink onClick={isMenuOpen ? this.toggleMenu : ''} to='/shop'>Shop</CustomLink>
+              <CustomLink onClick={isMenuOpen ? this.toggleMenu : ''} to='/about'>About</CustomLink>
+              <CustomLink onClick={isMenuOpen ? this.toggleMenu : ''} to='contact'>Contact</CustomLink>
               {user ? 
               <li><Link to='/' onClick={this.handleLogOut}><i className="fa fa-sign-out"/> Log Out</Link></li>
               : <CustomLink to='/login'><i className="fa fa-sign-in"/> Log In</CustomLink>}
@@ -118,7 +118,7 @@ export class Navbar extends Component {
 
 }
 
-const CustomLink = ({ to, children, ...props }) => {
+const CustomLink = ({ to, children, onClick, ...props }) => {
 
   const path = useResolvedPath(to);
 
@@ -127,7 +127,7 @@ const CustomLink = ({ to, children, ...props }) => {
     //Gives active class in case current URL matches the one passed in the parameters
 
     <li className={useMatch({ path: path.pathname, end: true }) ? 'active' : ''}>
-      <Link to={to} {...props}>
+      <Link to={to} onClick={onClick} {...props}>
         {children}
       </Link>
     </li>

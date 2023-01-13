@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import NotFound from "../404/NotFound";
+import Reviews from "../../components/Reviews/Reviews";
 import './Product.css';
 
 class Product extends Component {
@@ -62,7 +63,7 @@ class Product extends Component {
 
     const { response } = this.state;
 
-    if (response && response.message && response.message === 'Product not found' || this.props.params.id === '0') {
+    if ((response && response.message && response.message === 'Product not found') || this.props.params.id === '0') {
 
       return <NotFound />
 
@@ -70,27 +71,32 @@ class Product extends Component {
 
     return (
       <Fragment>
-        <div className="product-container">
-          <div className="left-column">
-            <img src="https://www.utsouthwestern.edu/asset/4021d4c4-526c-4b40-815c-1fa0241282fb/meth-thumb.jpg" alt="meth" />
-          </div>
-          <div className="right-column">
-            <div className="product-description">
-              <span>
-                Walter White &amp; Co.
-              </span>
-              <h1>{response && response.name}</h1>
-              <p>{response && response.description}</p>
+        <div className="page-container">
+          <div className="product-container">
+            <div className="left-column">
+              <img src="https://www.utsouthwestern.edu/asset/4021d4c4-526c-4b40-815c-1fa0241282fb/meth-thumb.jpg" alt="meth" />
             </div>
-            <div className="product-price">
-              <span>${response && response.cost}</span>
-              {localStorage.getItem('user') ? 
-              <button onClick={this.handleCart}> Add to cart </button>
-              : <Link to='/login'><button>Log in</button></Link>}
-              <div id="check">
-                <p>Added!</p>
+            <div className="right-column">
+              <div className="product-description">
+                <span>
+                  Walter White &amp; Co.
+                </span>
+                <h1>{response && response.name}</h1>
+                <p>{response && response.description}</p>
+              </div>
+              <div className="product-price">
+                <span>${response && response.cost}</span>
+                {localStorage.getItem('user') ? 
+                <button onClick={this.handleCart}> Add to cart </button>
+                : <Link to='/login'><button>Log in</button></Link>}
+                <div id="check">
+                  <p>Added!</p>
+                </div>
               </div>
             </div>
+          </div>
+          <div className="comments">
+          {response && <Reviews id={response.id}/>}
           </div>
         </div>
       </Fragment>

@@ -54,44 +54,62 @@ class Main {
             
             break;
 
-            case 'signup':
+        case 'signup':
 
-                if (isset($_POST['submit'])) {
+            if (isset($_POST['submit'])) {
 
-                    // Grab the data and instantiate the sign up controller
+                // Grab the data and instantiate the sign up controller
 
-                    $uid = $_POST['uid'];
-                    $pwd = $_POST['pwd'];
-                    $pwdRepeat = $_POST['pwdRepeat'];
-                    $email = $_POST['email'];
+                $uid = $_POST['uid'];
+                $pwd = $_POST['pwd'];
+                $pwdRepeat = $_POST['pwdRepeat'];
+                $email = $_POST['email'];
 
-                    $signUpGateway = new \model\SignUp($this->database);
+                $signUpGateway = new \model\SignUp($this->database);
 
-                    $signUpController = new \controller\SignUp($uid, $pwd, $pwdRepeat, $email, $signUpGateway);
+                $signUpController = new \controller\SignUp($uid, $pwd, $pwdRepeat, $email, $signUpGateway);
 
-                    // User sign up with error handling
+                // User sign up with error handling
 
-                    $signUpController->signUpUser();
+                $signUpController->signUpUser();
 
-                }
+            }
 
-                break;
+            break;
 
-                case 'cart':
-    
-                    // Grab the data and instantiate the cart controller
+        case 'cart':
 
-                    $uid = $this->parts[2] ?? null;
+            // Grab the data and instantiate the cart controller
 
-                    $cartGateway = new \model\Cart($this->database);
+            $uid = $this->parts[2] ?? null;
 
-                    $cartController = new \controller\Cart($cartGateway);
+            $cartGateway = new \model\Cart($this->database);
 
-                    // User sign up with error handling
+            $cartController = new \controller\Cart($cartGateway);
 
-                    $cartController->processRequest($_SERVER['REQUEST_METHOD'], $uid);
-    
-                    break;    
+            // Process cart request with error handling
+
+            $cartController->processRequest($_SERVER['REQUEST_METHOD'], $uid);
+
+            break;
+
+        case 'reviews':
+
+            // Grab the data and instantiate the cart controller
+
+            $product = $this->parts[2] ?? null;
+
+            $id = $this->parts[3] ?? null;
+
+            $reviewGateway = new \model\Review($this->database);
+
+            $reviewController = new \controller\Review($reviewGateway);
+
+            // Process cart request with error handling
+
+            $reviewController->processRequest($_SERVER['REQUEST_METHOD'], $product, $id);
+
+            break;  
 
         default:
 
