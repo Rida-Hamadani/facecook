@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './Navbar.css';
+import logo from './logo.png';
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 export class Navbar extends Component {
@@ -91,7 +92,7 @@ export class Navbar extends Component {
     return (
 
         <nav className="nav">
-          {(!isMenuOpen || innerWidth > 600) && <Link to="/" className="logo">FaceCook</Link>}
+          {(!isMenuOpen || innerWidth > 600) && <Link to="/"><div className="logo"><img alt="FaceCook" src={logo}/></div></Link>}
           {(user && !isMenuOpen)?
           <Link to='/cart'><div className="cart"><i className="fa fa-shopping-cart fa-2x" /></div></Link>: ''}
           {(isMenuOpen || innerWidth > 600) && (

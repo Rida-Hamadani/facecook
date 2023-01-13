@@ -92,7 +92,7 @@ class Review extends Database {
         $sql = "DELETE FROM reviews
                WHERE id=:id;";
 
-        $statement = $this->connection>prepares($sql);
+        $statement = $this->connection->prepare($sql);
         $statement->bindValue(":id", $id, PDO::PARAM_INT);
         $statement->execute();
 

@@ -120,7 +120,7 @@ class Product extends Database {
         $sql = "DELETE FROM products
                WHERE id=:id;";
 
-        $statement = $this->connection>prepares($sql);
+        $statement = $this->connection->prepare($sql);
         $statement->bindValue(":id", $id, PDO::PARAM_INT);
         $statement->execute();
 
