@@ -1,0 +1,21 @@
+.contact {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.contact a {
+
+    color: inherit;
+    text-decoration: none;
+
+}
+
+.contact a:hover {
+
+    text-decoration: underline;
+
+}

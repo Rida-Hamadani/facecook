@@ -109,7 +109,7 @@ class Main {
 
             $reviewController->processRequest($_SERVER['REQUEST_METHOD'], $product, $id);
 
-            break;  
+            break;
 
         default:
 

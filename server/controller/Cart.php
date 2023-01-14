@@ -96,6 +96,11 @@ class Cart extends \model\Cart {
 
     }
 
+    /*  The cart is saved in DB in the form of "X:X:X:X ... X:X" where all the X's are integers.
+        Each X occupying an odd place refers to the id of a product in the cart,
+        while the number adjacent to it to the right is its quantity.
+        An empty cart is represented by a zero.   */
+
     private function translateCart(string $update, string $uid, bool $add): string {
         
         $old = $this->decodeCart($this->gateway->get($uid));

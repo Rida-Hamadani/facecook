@@ -169,8 +169,8 @@ export class Cart extends Component {
                     </div>
                     <button onClick={this.displayMessage}>Pay</button>
                     <div id="final-message">
-                    <p>Payment Successful!</p>
-                    <img alt="Walter smiling" src={smile} width="200px" height="200px"/>
+                        <p>Payment Successful!</p>
+                        <img alt="Walter smiling" src={smile} width="200px" height="200px"/>
                     </div>
                 </div>
             )}
