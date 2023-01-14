@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, Navigate } from "react-router-dom"; 
+import smile from './walter_smile.webp';
 import './Cart.css';
 
 export class Cart extends Component {
@@ -42,7 +43,7 @@ export class Cart extends Component {
         if (newCart[index][1] > 1) {
 
             newCart[index][1] -= 1;
-
+            
         } else {
 
             newCart.splice(index, 1);
@@ -144,30 +145,33 @@ export class Cart extends Component {
                 </div>
             ) : (
                 <div className="cart-container">
-                <div className="head">
-                    <p>Click an item to remove</p>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.cart.map((item, index) => (
-                            <tr key={item[0].id} onClick={() => this.handleRemove(index)}>
-                                <td>{item[0].name}</td>
-                                <td>{item[1]}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <div className="cost-container">
-                    <p>Total cost: {this.calculateCost()}$</p>
-                </div>
-                <button onClick={this.displayMessage}>Pay</button>
-                <div id="final-message">Payment Successful!</div>
+                    <div className="head">
+                        <p>Click an item to remove</p>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.cart.map((item, index) => (
+                                <tr key={item[0].id} onClick={() => this.handleRemove(index)}>
+                                    <td>{item[0].name}</td>
+                                    <td>{item[1]}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="cost-container">
+                        <p>Total cost: {this.calculateCost()}$</p>
+                    </div>
+                    <button onClick={this.displayMessage}>Pay</button>
+                    <div id="final-message">
+                    <p>Payment Successful!</p>
+                    <img alt="Walter smiling" src={smile} width="200px" height="200px"/>
+                    </div>
                 </div>
             )}
             </Fragment>

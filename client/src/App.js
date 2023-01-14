@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Home from './pages/home/Home';
-import About from './pages/About';
+import About from './pages/about/About';
 import Contact from './pages/Contact';
 import Shop from './pages/shop/Shop';
 import LogIn from './pages/auth/LogIn';

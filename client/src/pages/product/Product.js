@@ -75,7 +75,7 @@ class Product extends Component {
         <div className="page-container">
           <div className="product-container">
             <div className="left-column">
-              <img src="https://www.utsouthwestern.edu/asset/4021d4c4-526c-4b40-815c-1fa0241282fb/meth-thumb.jpg" alt="meth" />
+              {(response && response.name) ? <img src={`/img/${response.name}.png`} alt={response.name} /> : ''}
             </div>
             <div className="right-column">
               <div className="product-description">
