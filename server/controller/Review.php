@@ -49,9 +49,10 @@ class Review extends \model\Review {
 
         switch ($method) {
 
-            case 'POST':
+            case 'PATCH':
 
-                $data = $_POST;
+                parse_str(file_get_contents('php://input'), $_PATCH);
+                $data = $_PATCH;
 
                 $errors = $this->getValidationErrors($data, false);
 
@@ -82,7 +83,7 @@ class Review extends \model\Review {
 
                 echo json_encode([
 
-                    'message' => "Product $id deleted",
+                    'message' => "Review $id deleted",
                     'rows' => $rows
 
                 ]);
@@ -92,7 +93,7 @@ class Review extends \model\Review {
             default:
             
                 http_response_code(405);
-                header('Allow: POST');
+                header('Allow: PATCH, DELETE');
 
         }
 
@@ -104,7 +105,19 @@ class Review extends \model\Review {
 
             case 'GET':
 
-                echo(json_encode($this->gateway->getAll($product)));
+                $data = $this->gateway->getAll($product);
+
+                if (empty($data)) {
+
+                    echo json_encode(['messages' => 'no reviews']);
+
+                    exit;
+
+                } else {
+
+                    echo json_encode($data);
+
+                }
 
                 break;
 

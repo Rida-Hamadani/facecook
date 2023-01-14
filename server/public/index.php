@@ -18,7 +18,17 @@ $config = require(BASE_PATH . 'include/config.php');
 
 // Headers
 
-header('Content-type: application/json; charset=UTF-8');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+
+    // Handle preflight request
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: PATCH, DELETE');
+    header('Access-Control-Allow-Headers: Content-Type');
+    exit;
+
+}
+
+header("application/x-www-form-urlencoded; charset=utf-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PATCH, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");

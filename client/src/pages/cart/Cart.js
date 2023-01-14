@@ -29,7 +29,7 @@ export class Cart extends Component {
 
         fetch('http://localhost:8888/cart/' + uid.slice(1,-1), {
 
-            method: 'POST',
+            method: 'PATCH',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
             body: new URLSearchParams({
       

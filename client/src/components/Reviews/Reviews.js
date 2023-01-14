@@ -30,6 +30,33 @@ class Reviews extends Component {
         this.setState({editing: id, formData: {title: review.title, body: review.body, stars: review.stars}});
     }
 
+    handleDelete = async id => {
+        
+        let response = await fetch(`http://localhost:8888/reviews/${this.props.id}/${id}`, {
+            method: 'DELETE',
+            headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+        });
+
+        response = await response.json();
+
+        if (response.message && response.message === `Review ${id} deleted`) {
+
+            this.fetchReviews();
+
+        }
+
+        if (response.errors) {
+
+            this.setState({
+
+                errors: response.errors
+
+            })
+
+        }
+
+    }
+
     changeEdit = event => {
         const {name, value} = event.target;
         this.setState(prevState => ({
@@ -44,7 +71,7 @@ class Reviews extends Component {
         event.preventDefault();
         let review = this.state.reviews.find(review => review.id === this.state.editing);
         let response = await fetch(`http://localhost:8888/reviews/${this.props.id}/${review.id}`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
             body: new URLSearchParams({
 
@@ -81,8 +108,11 @@ class Reviews extends Component {
     reviewStars = num => {
         let stars = [];
         for(let i= 0; i < num; ++i) {
+
           stars.push(<i key={i} className="fa fa-star colored-star" aria-hidden="true"></i>);
+
         }
+
         if (num < 5) {
 
             for(let i = num; i < 5; ++i) {
@@ -105,10 +135,11 @@ class Reviews extends Component {
 
       }
   
-    componentDidMount() {
+    componentDidUpdate(prevProps, prevState) {
 
-        this.fetchReviews();
-
+        if (prevState.reviews.length === 0 && this.state.reviews.length === 0) {
+            this.fetchReviews();
+        }
     }
   
     render() {
@@ -117,7 +148,7 @@ class Reviews extends Component {
 
         return (
 
-            <div className="reviews-container">
+            (reviews && !('messages' in reviews)) ? (<div className="reviews-container">
                 {reviews.map(review => (
                     <div key={review.id} className='review'>
                         <div className="profile">
@@ -171,9 +202,14 @@ class Reviews extends Component {
                                 </div>
                                 <p className="review-body">{review.body}</p>
                                 {localStorage.getItem('user').slice(1,-1) === review.uid ? (
-                                    <button className='edit' onClick={() => this.handleEdit(review.id)}>
-                                        <i className="fa fa-edit" /> Edit
-                                    </button>
+                                    <div className="edit-buttons">
+                                        <button className='edit' onClick={() => {this.handleEdit(review.id)}}>
+                                            <i className="fa fa-edit" /> Edit
+                                        </button>
+                                        <button className='edit' onClick={() => {this.handleDelete(review.id)}}>
+                                            <i className="fa fa-trash" /> Delete
+                                        </button>
+                                    </div>
                                 ) : (
                                     ''
                                 )}
@@ -183,6 +219,9 @@ class Reviews extends Component {
                     </div>
                 ))}
             </div>
+        ) : (
+            ''
+        )
 
         );
         

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import NotFound from "../404/NotFound";
 import Reviews from "../../components/Reviews/Reviews";
+import AddReview from "../../components/Reviews/AddReview";
 import './Product.css';
 
 class Product extends Component {
@@ -25,7 +26,7 @@ class Product extends Component {
 
     fetch('http://localhost:8888/cart/' + localStorage.getItem('user').slice(1,-1), {
 
-      method: 'POST',
+      method: 'PATCH',
       headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
       body: new URLSearchParams({
 
@@ -97,6 +98,7 @@ class Product extends Component {
           </div>
           <div className="comments">
           {response && <Reviews id={response.id}/>}
+          {response && <AddReview id={response.id} />}
           </div>
         </div>
       </Fragment>
