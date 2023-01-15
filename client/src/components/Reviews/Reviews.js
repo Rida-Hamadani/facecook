@@ -71,7 +71,7 @@ class Reviews extends Component {
         event.preventDefault();
         let review = this.state.reviews.find(review => review.id === this.state.editing);
         let response = await fetch(`httpa://lvivid-powder-production.up.railway.app/reviews/${this.props.id}/${review.id}`, {
-            method: 'PATCH',
+            method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
             body: new URLSearchParams({
 

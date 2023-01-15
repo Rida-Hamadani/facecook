@@ -25,7 +25,7 @@ class Product extends Component {
 
     fetch('https://facecookwalter.000webhostapp.com/cart/' + localStorage.getItem('user').slice(1,-1), {
 
-      method: 'PATCH',
+      method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
       body: new URLSearchParams({
 

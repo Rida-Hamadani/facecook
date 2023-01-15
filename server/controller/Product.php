@@ -71,9 +71,9 @@ class Product extends \model\Product {
 
                 break;
 
-            case 'PATCH':
+            case 'POST':
 
-                $data = (array) json_decode(file_get_contents('php://input'), true);
+                $data = (array) $_POST;
                 $errors = $this->getValidationErrors($data, false);
 
                 if (! empty($errors)) {
@@ -113,7 +113,7 @@ class Product extends \model\Product {
             default:
             
                 http_response_code(405);
-                header('Allow: GET, PATCH, DELETE');
+                header('Allow: GET, POST, DELETE');
 
         }
 

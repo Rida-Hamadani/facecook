@@ -41,10 +41,9 @@ class Cart extends \model\Cart {
 
                 break;
 
-            case 'PATCH':
+            case 'POST':
 
-                parse_str(file_get_contents('php://input'), $_PATCH);
-                $data = $_PATCH;
+                $data = $_POST;
 
                 $errors = $this->getValidationErrors($data, true);
 
@@ -90,7 +89,7 @@ class Cart extends \model\Cart {
             default:
             
                 http_response_code(405);
-                header('Allow: GET, PATCH');
+                header('Allow: GET, POST');
 
         }
 

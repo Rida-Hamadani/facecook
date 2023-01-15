@@ -49,10 +49,9 @@ class Review extends \model\Review {
 
         switch ($method) {
 
-            case 'PATCH':
+            case 'POST':
 
-                parse_str(file_get_contents('php://input'), $_PATCH);
-                $data = $_PATCH;
+                $data = $_POST;
 
                 $errors = $this->getValidationErrors($data, false);
 
@@ -93,7 +92,7 @@ class Review extends \model\Review {
             default:
             
                 http_response_code(405);
-                header('Allow: PATCH, DELETE');
+                header('Allow: POST, DELETE');
 
         }
 
