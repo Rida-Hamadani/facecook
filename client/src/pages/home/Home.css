@@ -1,0 +1,64 @@
+.home {
+
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.welcome {
+
+    margin: 10%;
+    background-color: black;
+    width:100%;
+    color: white;
+    text-align: center;
+
+}
+
+.grid-container {
+    display: grid;
+    gap: 5fr 5fr;
+    grid-template-columns: 40fr 40fr;
+    grid-template-rows: 40fr 40fr;
+    background-color: lightblue;
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 3%;
+
+}
+
+.grid-item {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.home a {
+
+    color: inherit;
+    text-decoration: none;
+
+}
+
+.home a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .shop-portion {
+        
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+}
