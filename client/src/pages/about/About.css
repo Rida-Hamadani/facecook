@@ -1,35 +1,42 @@
+.about {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .about-container {
 
+    margin-top: 5%;
     height: 100%;
     width: 100%;
-    margin: 0;
     max-width: 1200px;
-    margin: 0 auto;
     padding: 15px;
     display: flex;
     line-height: 1.6;
         
 }
 
-.left-column {
+.about-left-column {
 
-    width: 30%;
+    width: 100%;
     position: relative;
 
 }
 
-.right-column {
+.about-right-column {
 
     width: 100%;
     margin-top: 60px;
 
 }
 
-.left-column img {
+.about-left-column img {
 
-    width: 100%;
+    width: 50%;
     position: absolute;
-    left: 0;
+    left: 40%
 
 }
 
@@ -45,17 +52,17 @@
         flex-direction: column-reverse;
     }
     
-    .left-column {
+    .about-left-column {
         width: 100%;
         position: relative;
     }
 
-    .right-column {
+    .about-right-column {
         width: 100%;
         margin-top: 0;
     }
 
-    .left-column img {
+    .about-left-column img {
         width: 100%;
         position: relative;
         left: 0;

@@ -8,10 +8,10 @@ export class About extends Component {
       <Fragment>
         <div className="about">
           <div className="about-container">
-            <div className="left-column">
+            <div className="about-left-column">
                 <img alt="Walter White" src="/img/Walter.png" />
               </div>
-              <div className="right-column">
+              <div className="about-right-column">
                 <p>
                   My name is Walter Hartwell White. <br />
                   I live at 308 Negra Arroyo Lane, Albuquerque, New Mexico, 87104.  <br />
