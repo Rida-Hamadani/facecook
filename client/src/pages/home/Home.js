@@ -6,13 +6,42 @@ import './Home.css';
 
 class Home extends Component {
 
+  constructor (props) {
+
+    super(props);
+    this.state = {
+
+      user: localStorage.getItem('user')
+
+    }
+
+  }
+
+  handleLogOut = () => {
+
+    this.setState({
+
+      user: null
+      
+    });
+
+  }
+
+  componentDidMount() {
+
+    window.addEventListener('logOut', this.handleLogOut);
+
+  };
+
   render() {
-    const user = localStorage.getItem("user").slice(1, -1);
+
+    const { user } = this.state
+
     return (
      <Fragment>
       <div className='home'>
       <div className='welcome'>
-        Welcome{user ? ', ' + user + ', ': ' ' }to FaceCook, the #1 e-commerce company in the world!
+        Welcome{user ? ', ' + user.slice(1,-1) + ', ': ' ' }to FaceCook, the #1 e-commerce company in the world!
       </div>
       <div className='grid-container'>
       <div className='grid-item'>

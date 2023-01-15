@@ -201,7 +201,7 @@ class Reviews extends Component {
                                     <div className="review-stars">{this.reviewStars(review.stars)}</div>
                                 </div>
                                 <p className="review-body">{review.body}</p>
-                                {localStorage.getItem('user').slice(1,-1) === review.uid ? (
+                                {localStorage.getItem('user') && localStorage.getItem('user').slice(1,-1) === review.uid ? (
                                     <div className="edit-buttons">
                                         <button className='edit' onClick={() => {this.handleEdit(review.id)}}>
                                             <i className="fa fa-edit" /> Edit

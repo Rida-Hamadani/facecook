@@ -21,8 +21,7 @@ class Product extends Component {
 
   handleCart = async event => {
 
-    event.preventDefault()
-
+    event.preventDefault();
 
     fetch('http://localhost:8888/cart/' + localStorage.getItem('user').slice(1,-1), {
 

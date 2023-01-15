@@ -68,6 +68,8 @@ export class Navbar extends Component {
 
     })
 
+    window.dispatchEvent(new Event("logOut"));
+
   }
 
 
