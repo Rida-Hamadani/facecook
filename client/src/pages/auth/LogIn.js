@@ -22,7 +22,7 @@ class LogIn extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        fetch('http://localhost:8888/login', {
+        fetch('https://facecookwalter.000webhostapp.com/login', {
 
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},

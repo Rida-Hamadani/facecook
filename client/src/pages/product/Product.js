@@ -23,7 +23,7 @@ class Product extends Component {
 
     event.preventDefault();
 
-    fetch('http://localhost:8888/cart/' + localStorage.getItem('user').slice(1,-1), {
+    fetch('https://facecookwalter.000webhostapp.com/cart/' + localStorage.getItem('user').slice(1,-1), {
 
       method: 'PATCH',
       headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
@@ -44,7 +44,7 @@ class Product extends Component {
 
   componentDidMount() {
     
-    fetch('http://localhost:8888/products/' + this.props.params.id)
+    fetch('https://facecookwalter.000webhostapp.com/products/' + this.props.params.id)
     .then(response => response.json())
     .then(data => {
 

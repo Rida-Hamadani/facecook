@@ -32,7 +32,7 @@ class Reviews extends Component {
 
     handleDelete = async id => {
         
-        let response = await fetch(`http://localhost:8888/reviews/${this.props.id}/${id}`, {
+        let response = await fetch(`https://facecookwalter.000webhostapp.com/reviews/${this.props.id}/${id}`, {
             method: 'DELETE',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
         });
@@ -70,7 +70,7 @@ class Reviews extends Component {
     saveEdit = async event => {
         event.preventDefault();
         let review = this.state.reviews.find(review => review.id === this.state.editing);
-        let response = await fetch(`http://localhost:8888/reviews/${this.props.id}/${review.id}`, {
+        let response = await fetch(`httpa://lvivid-powder-production.up.railway.app/reviews/${this.props.id}/${review.id}`, {
             method: 'PATCH',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
             body: new URLSearchParams({
@@ -129,7 +129,7 @@ class Reviews extends Component {
 
       fetchReviews = () => {
 
-        fetch(`http://localhost:8888/reviews/${this.props.id}`)
+        fetch(`https://facecookwalter.000webhostapp.com/reviews/${this.props.id}`)
         .then(response => response.json())
         .then(reviews => this.setState({ reviews }));
 

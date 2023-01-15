@@ -24,7 +24,7 @@ class SignUp extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-            fetch('http://localhost:8888/signup', {
+            fetch('https://facecookwalter.000webhostapp.com/signup', {
 
                 method: 'POST',
                 headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},

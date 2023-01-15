@@ -28,7 +28,7 @@ export class Cart extends Component {
 
         let newCart = [...this.state.cart];
 
-        fetch('http://localhost:8888/cart/' + uid.slice(1,-1), {
+        fetch('https://facecookwalter.000webhostapp.com/cart/' + uid.slice(1,-1), {
 
             method: 'PATCH',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
@@ -69,7 +69,7 @@ export class Cart extends Component {
 
                 for (let id of Object.keys(response)) {
 
-                  const res = await fetch(`http://localhost:8888/products/${id}`);
+                  const res = await fetch(`https://facecookwalter.000webhostapp.com/products/${id}`);
                   const item = await res.json();
                   newCart.push([item, response[id]]);
 
@@ -116,7 +116,7 @@ export class Cart extends Component {
             return;
         }
 
-        fetch('http://localhost:8888/cart/' +  uid.slice(1,-1))
+        fetch('https://facecookwalter.000webhostapp.com/cart/' +  uid.slice(1,-1))
         .then(response => response.json())
         .then(data => 
         

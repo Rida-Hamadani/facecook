@@ -18,7 +18,7 @@ class Shop extends Component {
 
   componentDidMount() {
 
-    fetch('http://localhost:8888/products')
+    fetch('https://facecookwalter.000webhostapp.com/products')
       .then(response => response.json())
       .then(data => {
 

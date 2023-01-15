@@ -21,7 +21,7 @@ class AddReview extends Component {
         event.preventDefault();
         if (!this.state.submitting) {
             this.setState({submitting: true});
-            fetch(`http://localhost:8888/reviews/${this.props.id}`, {
+            fetch(`https://facecookwalter.000webhostapp.com/reviews/${this.props.id}`, {
                 method: 'POST',
                 headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
                 body: new URLSearchParams({
