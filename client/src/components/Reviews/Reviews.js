@@ -33,8 +33,13 @@ class Reviews extends Component {
     handleDelete = async id => {
         
         let response = await fetch(`https://facecookwalter.000webhostapp.com/reviews/${this.props.id}/${id}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+            body: new URLSearchParams({
+
+                "method": "delete" 
+
+            })
         });
 
         response = await response.json();
@@ -78,6 +83,7 @@ class Reviews extends Component {
                 "title": this.state.formData.title,
                 "stars": this.state.formData.stars,
                 "body": this.state.formData.body,
+                "method": "post"
 
             })
         });

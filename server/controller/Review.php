@@ -53,46 +53,50 @@ class Review extends \model\Review {
 
                 $data = $_POST;
 
-                $errors = $this->getValidationErrors($data, false);
+                if ($data['method'] === 'patch') {
 
-                if (! empty($errors)) {
+                    $errors = $this->getValidationErrors($data, false);
 
-                    http_response_code(422);
+                    if (! empty($errors)) {
 
-                    echo json_encode(['errors' => $errors]);
+                        http_response_code(422);
 
-                    break;
+                        echo json_encode(['errors' => $errors]);
+
+                        break;
+
+                    }
+
+                    $rows = $this->gateway->update($review, $product, $data);
+
+                    echo json_encode([
+
+                        'review' => "Review $id updated",
+                        'rows' => $rows
+                        
+                    ]);
 
                 }
 
-                $rows = $this->gateway->update($review, $product, $data);
+                if ($data['method'] === 'delete') { 
+                
+                    $rows = $this->gateway->delete($id);
 
-                echo json_encode([
+                    echo json_encode([
 
-                    'review' => "Review $id updated",
-                    'rows' => $rows
-                    
-                ]);
+                        'message' => "Review $id deleted",
+                        'rows' => $rows
 
-                break;
+                    ]);
 
-            case 'DELETE':
-
-                $rows = $this->gateway->delete($id);
-
-                echo json_encode([
-
-                    'message' => "Review $id deleted",
-                    'rows' => $rows
-
-                ]);
+                }
 
                 break;
 
             default:
             
                 http_response_code(405);
-                header('Allow: POST, DELETE');
+                header('Allow: POST');
 
         }
 
