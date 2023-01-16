@@ -75,7 +75,7 @@ class Reviews extends Component {
     saveEdit = async event => {
         event.preventDefault();
         let review = this.state.reviews.find(review => review.id === this.state.editing);
-        let response = await fetch(`httpa://lvivid-powder-production.up.railway.app/reviews/${this.props.id}/${review.id}`, {
+        let response = await fetch(`https://facecookwalter.000webhostapp.com/reviews/${this.props.id}/${review.id}`, {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
             body: new URLSearchParams({
