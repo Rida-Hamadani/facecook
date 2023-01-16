@@ -12,9 +12,23 @@ export class Navbar extends Component {
 
       user: localStorage.getItem('user'),
       isMenuOpen: false,
-      innerWidth: window.innerWidth
+      innerWidth: this.windowWidth()
 
     };
+
+  }
+
+  windowWidth = () => {
+
+    if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+      return window.screen.width;
+
+    } else {
+
+      return window.innerWidth;
+
+    }
 
   }
 
@@ -32,11 +46,11 @@ export class Navbar extends Component {
 
     this.setState({
 
-      innerWidth: window.innerWidth
+      innerWidth: this.windowWidth()
 
     });
 
-    window.innerWidth > 600 && (
+    this.windowWidth() > 600 && (
 
       this.setState({
 

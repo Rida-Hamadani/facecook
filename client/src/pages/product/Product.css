@@ -124,7 +124,7 @@
 
 }
 
-@media all and (max-device-width: 600px) {
+@media all and (max-device-width: 600px), (max-width: 850px) {
 
     .product-container {
         flex-direction: column-reverse;
