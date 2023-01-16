@@ -53,7 +53,7 @@
 }
 
 
-@media (max-width: 600px) {
+@media all and (max-device-width: 600px) {
 
     .grid-container {
         

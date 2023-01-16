@@ -19,7 +19,7 @@ table {
 
 }
 
-@media only screen and (max-width: 800px) {
+@media all and (max-device-width: 600px) {
 
     table {
 
