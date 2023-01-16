@@ -83,7 +83,7 @@ class Reviews extends Component {
                 "title": this.state.formData.title,
                 "stars": this.state.formData.stars,
                 "body": this.state.formData.body,
-                "method": "post"
+                "method": "patch"
 
             })
         });
