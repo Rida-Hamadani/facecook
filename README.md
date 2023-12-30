@@ -1,4 +1,6 @@
-Open main folder in two terminals, enter in the first:
+You can view the live website at: https://facecookwalter.netlify.app/
+
+To start it locally, open main folder in two terminals, enter in the first:
 ```
 cd client
 npm install
